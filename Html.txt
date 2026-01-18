@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديزاد ريت برو - أسعار الصرف</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>ديزاد ريت لايف</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
         <header>
             <h1>ديزاد ريت <span>مباشر</span></h1>
-            <div id="clock-container">
+            <div class="clock-box">
                 <p id="clock">00:00:00</p>
-                <p id="date-text"></p>
+                <p id="date">جاري التحميل...</p>
             </div>
         </header>
 
-        <section class="main-rates" id="rates-list">
-            <div class="loading">جاري جلب الأسعار من السوق العالمي...</div>
-        </section>
+        <div id="rates-container"></div>
 
-        <div class="refresh-note">
-            <i class="fas fa-sync-alt fa-spin"></i> التحديث يتم آلياً كل لحظة
+        <div class="calculator">
+            <h3>حاسبة سريعة</h3>
+            <input type="number" id="calc-input" placeholder="أدخل المبلغ...">
+            <select id="calc-select">
+                <option value="EUR">أورو (€)</option>
+                <option value="USD">دولار ($)</option>
+                <option value="GBP">جنيه (£)</option>
+                <option value="SAR">ريال سعودي</option>
+                <option value="AED">درهم إماراتي</option>
+            </select>
+            <p>النتيجة: <span id="calc-result">0</span> دج</p>
         </div>
     </div>
     <script src="script.js"></script>
