@@ -1,75 +1,50 @@
-// مفتاح الـ API الخاص بك
 const apiKey = "fb87de9454864be34e7cbc88";
-const apiURL = `https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`;
+let ratesData = {};
 
-// 1. وظيفة الساعة التي تتحرك بالثواني (Real-time Clock)
-function startClock() {
+function updateTime() {
     setInterval(() => {
         const now = new Date();
-        const timeString = now.toLocaleTimeString('en-GB', { hour12: false }); // نظام 24 ساعة
-        document.getElementById('clock').innerText = timeString;
-        
-        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-        document.getElementById('date-text').innerText = now.toLocaleDateString('ar-DZ', options);
+        document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
+        document.getElementById('date').innerText = now.toLocaleDateString('ar-DZ', {weekday:'long', day:'numeric', month:'long'});
     }, 1000);
 }
 
-// 2. جلب الأسعار للعملات الخمس
-async function fetchRates() {
+async function getRates() {
     try {
-        const response = await fetch(apiURL);
-        const data = await response.json();
-        
-        if (data.result === "success") {
-            const usdToDzd = data.conversion_rates.DZD;
+        const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`);
+        const data = await res.json();
+        ratesData = data.conversion_rates;
+        const usdToDzd = ratesData.DZD;
 
-            // تحديد العملات الخمس المطلوبة
-            const currencies = [
-                { name: "الأورو (Euro)", code: "EUR", flag: "eu" },
-                { name: "الدولار الأمريكي", code: "USD", flag: "us" },
-                { name: "الجنيه الإسترليني", code: "GBP", flag: "gb" },
-                { name: "الريال السعودي", code: "SAR", flag: "sa" },
-                { name: "الدرهم الإماراتي", code: "AED", flag: "ae" }
-            ];
+        const list = [
+            {name:"الأورو", code:"EUR", flag:"eu"},
+            {name:"الدولار", code:"USD", flag:"us"},
+            {name:"الجنيه", code:"GBP", flag:"gb"},
+            {name:"السعودي", code:"SAR", flag:"sa"},
+            {name:"الإماراتي", code:"AED", flag:"ae"}
+        ];
 
-            const container = document.getElementById('rates-list');
-            container.innerHTML = ""; // إزالة رسالة التحميل
-
-            currencies.forEach(curr => {
-                let rate;
-                if (curr.code === "USD") {
-                    rate = usdToDzd;
-                } else {
-                    // حساب سعر العملة مقابل الدينار: (سعر الدولار بالدينار / سعر الدولار بالعملة الأخرى)
-                    const priceInUsd = data.conversion_rates[curr.code];
-                    rate = usdToDzd / priceInUsd;
-                }
-
-                container.innerHTML += `
-                    <div class="rate-card">
-                        <div class="currency-info">
-                            <img src="https://flagcdn.com/w40/${curr.flag}.png" alt="${curr.code}">
-                            <div>
-                                <h3>${curr.name}</h3>
-                                <p>${curr.code} / DZD</p>
-                            </div>
-                        </div>
-                        <div class="price-info">
-                            <span class="price">${rate.toFixed(2)}</span>
-                            <span class="unit">دج</span>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    } catch (error) {
-        console.error("خطأ في الاتصال بالـ API");
-    }
+        const container = document.getElementById('rates-container');
+        container.innerHTML = "";
+        list.forEach(c => {
+            const price = usdToDzd / ratesData[c.code];
+            container.innerHTML += `
+                <div class="rate-card">
+                    <img src="https://flagcdn.com/w40/${c.flag}.png">
+                    <span>${c.name}</span>
+                    <b>${price.toFixed(2)} دج</b>
+                </div>`;
+        });
+    } catch (e) { console.log("Error fetching rates"); }
 }
 
-// تشغيل العمليات
-startClock();
-fetchRates();
+document.getElementById('calc-input').addEventListener('input', () => {
+    const val = document.getElementById('calc-input').value;
+    const code = document.getElementById('calc-select').value;
+    const res = val * (ratesData.DZD / ratesData[code]);
+    document.getElementById('calc-result').innerText = res.toLocaleString();
+});
 
-// تحديث الأسعار تلقائياً كل 5 دقائق لضمان دقة السوق
-setInterval(fetchRates, 300000);
+updateTime();
+getRates();
+setInterval(getRates, 300000); // تحديث الأسعار كل 5 دقائق
