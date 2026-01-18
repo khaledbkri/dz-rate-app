@@ -1,56 +1,9 @@
-:root {
-    --bg-color: #0f172a;
-    --card-bg: #1e293b;
-    --accent: #38bdf8;
-    --gold: #fbbf24;
-    --text: #f8fafc;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-
-body { background-color: var(--bg-color); color: var(--text); padding: 20px; }
-
-.app-container { max-width: 450px; margin: auto; }
-
-header { text-align: center; margin-bottom: 30px; }
-header h1 span { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; border: 1px solid var(--accent); padding: 2px 5px; border-radius: 4px; }
-
-.rate-card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    border: 1px solid #334155;
-}
-
-.currency-info { display: flex; align-items: center; gap: 15px; }
-.currency-info img { width: 35px; border-radius: 5px; }
-.currency-info h3 { font-size: 1.1rem; }
-.currency-info p { font-size: 0.8rem; color: #94a3b8; }
-
-.price-info { text-align: right; }
-.price { display: block; font-size: 1.4rem; font-weight: bold; }
-.status { font-size: 0.8rem; }
-.up { color: #4ade80; }
-.down { color: #f87171; }
-
-.gold { border-left: 5px solid var(--gold); }
-.gold i { font-size: 30px; color: var(--gold); }
-
-/* Converter Section */
-.converter { background: var(--card-bg); padding: 20px; border-radius: 15px; margin-top: 25px; }
-.input-group { display: flex; gap: 10px; margin-top: 15px; }
-input, select { 
-    background: #0f172a; border: 1px solid #334155; color: white; 
-    padding: 12px; border-radius: 8px; flex: 1; outline: none;
-}
-.result { margin-top: 15px; font-weight: bold; color: var(--accent); }
-
-.ad-placeholder {
-    margin-top: 30px; height: 60px; background: #334155; 
-    border-radius: 8px; display: grid; place-items: center; 
-    font-size: 0.7rem; color: #94a3b8; border: 1px dashed #475569;
-}
+body { font-family: sans-serif; background-color: #0f172a; color: white; text-align: center; direction: rtl; }
+.app-container { padding: 20px; max-width: 400px; margin: auto; }
+h1 span { color: #38bdf8; }
+.clock-box { background: #1e293b; padding: 15px; border-radius: 15px; margin-bottom: 20px; }
+#clock { font-size: 2rem; font-weight: bold; margin: 0; color: #38bdf8; }
+.rate-card { background: #1e293b; display: flex; justify-content: space-between; align-items: center; padding: 15px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #334155; }
+.rate-card img { width: 30px; border-radius: 4px; }
+.calculator { margin-top: 30px; background: #38bdf8; color: #0f172a; padding: 20px; border-radius: 20px; }
+input, select { width: 80%; padding: 10px; margin: 10px 0; border-radius: 8px; border: none; font-size: 1rem; }
