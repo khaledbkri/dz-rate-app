@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ديزاد ريت برو - أسعار الصرف</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>ديزاد ريت <span>مباشر</span></h1>
+            <div id="clock-container">
+                <p id="clock">00:00:00</p>
+                <p id="date-text"></p>
+            </div>
+        </header>
+
+        <section class="main-rates" id="rates-list">
+            <div class="loading">جاري جلب الأسعار من السوق العالمي...</div>
+        </section>
+
+        <div class="refresh-note">
+            <i class="fas fa-sync-alt fa-spin"></i> التحديث يتم آلياً كل لحظة
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
