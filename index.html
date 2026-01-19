@@ -3,32 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <meta name="google-site-verification" content="8KajK_S9zE7whxLrpmLenup78-PVIIEqNjq9hmly-aM" />
-
-    <title>DzRate Pro | أسعار العملات في الجزائر - السكوار والبنك</title>
-    
-    <link rel="canonical" href="https://khaledbkri.github.io/dz-rate-app/" />
-    <meta name="description" content="تابع أسعار اليورو والدولار مقابل الدينار الجزائري لحظة بلحظة في السوق السوداء (السكوار) والبنك المركزي.">
-
+    <title>DzRate Pro | أسعار السكوار والبنك</title>
     <link rel="stylesheet" href="style.css">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-3932693048334628" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="app-container">
-        <div class="language-switcher">
-            <button onclick="changeLang('en')">English</button>
-            <button onclick="changeLang('ar')">العربية</button>
-            <button onclick="changeLang('fr')">Français</button>
-        </div>
-
         <header>
-            <h1>DzRate <span style="color: #4caf50;">Pro</span></h1>
+            <h1 style="text-align:center;">DzRate <span style="color:#4caf50;">Pro</span></h1>
             <div class="clock-box">
-                <p id="clock">00:00:00</p>
-                <p id="date">Loading...</p>
+                <p id="clock" style="font-size:1.4rem; font-weight:bold; margin:5px 0;">00:00:00</p>
+                <p id="date" style="font-size:0.9rem; color:#8b949e;">Loading...</p>
             </div>
         </header>
 
-        <div id="
+        <div id="rates-container"></div>
+
+        <div class="calculator">
+            <h3 style="text-align:center; color:#4caf50;">محول العملات الذكي</h3>
+            <input type="number" id="calc-input" placeholder="أدخل المبلغ هنا...">
+            <select id="from-currency"></select>
+            <select id="to-currency"></select>
+            <p class="calc-res">النتيجة: <span id="calc-result">0</span></p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
