@@ -9,7 +9,11 @@ const translations = {
         placeholder: "Enter amount...",
         result: "Result",
         dir: "ltr",
-        currencies: { EUR: "Euro", USD: "Dollar", GBP: "Pound", SAR: "Riyal", AED: "Dirham" },
+        currencies: { 
+            EUR: "Euro", USD: "US Dollar", GBP: "Pound Sterling", 
+            SAR: "Saudi Riyal", AED: "UAE Dirham", SEK: "Swedish Krona", 
+            CAD: "Canadian Dollar", TRY: "Turkish Lira" 
+        },
         unit: "DA"
     },
     ar: {
@@ -18,7 +22,11 @@ const translations = {
         placeholder: "أدخل المبلغ...",
         result: "النتيجة",
         dir: "rtl",
-        currencies: { EUR: "الأورو", USD: "الدولار", GBP: "الجنيه", SAR: "الريال", AED: "الدرهم" },
+        currencies: { 
+            EUR: "الأورو", USD: "الدولار الأمريكي", GBP: "الجنيه الإسترليني", 
+            SAR: "الريال السعودي", AED: "الدرهم الإماراتي", SEK: "الكرونة السويدية", 
+            CAD: "الدولار الكندي", TRY: "الليرة التركية" 
+        },
         unit: "دج"
     },
     fr: {
@@ -27,7 +35,11 @@ const translations = {
         placeholder: "Montant...",
         result: "Résultat",
         dir: "ltr",
-        currencies: { EUR: "Euro", USD: "Dollar", GBP: "Livre", SAR: "Riyal", AED: "Dirham" },
+        currencies: { 
+            EUR: "Euro", USD: "Dollar US", GBP: "Livre Sterling", 
+            SAR: "Riyal Saoudien", AED: "Dirham EAU", SEK: "Couronne Suédoise", 
+            CAD: "Dollar Canadien", TRY: "Lire Turque" 
+        },
         unit: "DA"
     }
 };
@@ -60,9 +72,13 @@ function displayRates() {
     if (!ratesData.DZD) return;
     const t = translations[currentLang];
     const usdToDzd = ratesData.DZD;
+    
+    // قائمة العملات الموسعة لتظهر جميعها في الواجهة
     const currencies = [
         {code:"EUR", flag:"eu"}, {code:"USD", flag:"us"},
-        {code:"GBP", flag:"gb"}, {code:"SAR", flag:"sa"}, {code:"AED", flag:"ae"}
+        {code:"GBP", flag:"gb"}, {code:"CAD", flag:"ca"},
+        {code:"SEK", flag:"se"}, {code:"TRY", flag:"tr"},
+        {code:"SAR", flag:"sa"}, {code:"AED", flag:"ae"}
     ];
 
     const container = document.getElementById('rates-container');
@@ -85,9 +101,14 @@ function performConversion() {
     const amount = document.getElementById('calc-input').value;
     const from = document.getElementById('from-currency').value;
     const to = document.getElementById('to-currency').value;
+    const t = translations[currentLang];
+
     if (amount && ratesData[from] && ratesData[to]) {
         const result = (amount / ratesData[from]) * ratesData[to];
-        document.getElementById('calc-result').innerText = result.toLocaleString(undefined, {maximumFractionDigits: 2});
+        // النتيجة تظهر الآن مع رمز العملة المختار بشكل احترافي
+        document.getElementById('calc-result').innerText = result.toLocaleString(undefined, {maximumFractionDigits: 2}) + " " + to;
+    } else {
+        document.getElementById('calc-result').innerText = "0";
     }
 }
 
@@ -96,8 +117,9 @@ document.getElementById('from-currency').addEventListener('change', performConve
 document.getElementById('to-currency').addEventListener('change', performConversion);
 
 getRates();
-setLanguage('en'); // اللغة الافتراضية عند الدخول
+setLanguage('en'); 
 setInterval(() => {
     const now = new Date();
     document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
 }, 1000);
+setInterval(getRates, 300000);
