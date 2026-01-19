@@ -1,94 +1,54 @@
-const apiKey = "fb87de9454864be34e7cbc88";
-let ratesData = {};
-let currentLang = 'en';
-const squareFactor = 1.35; // نسبة الزيادة في سعر السكوار
-
-const translations = {
-    en: { bank: "Bank Rate", square: "Parallel Market", unit: "DA", calc: "Converter", res: "Result" },
-    ar: { bank: "سعر البنك", square: "السوق الموازي", unit: "دج", calc: "محول العملات", res: "النتيجة" },
-    fr: { bank: "Taux Banque", square: "Marché Parallèle", unit: "DA", calc: "Convertisseur", res: "Résultat" }
-};
-
-const activeCurrencies = [
-    {code:"EUR", flag:"eu", name:{en:"Euro", ar:"الأورو", fr:"Euro"}},
-    {code:"USD", flag:"us", name:{en:"US Dollar", ar:"الدولار", fr:"Dollar"}},
-    {code:"SAR", flag:"sa", name:{en:"Saudi Riyal", ar:"الريال السعودي", fr:"Riyal"}}
+const currencies = [
+    { code: 'EUR', name: 'Euro', flag: '🇪🇺', bank: 145.20, square: 242.00 },
+    { code: 'USD', name: 'US Dollar', flag: '🇺🇸', bank: 134.50, square: 224.00 }
 ];
 
-async function getRates() {
-    try {
-        const res = await fetch(`https://v6.exchangerate-api.com/v6/${apiKey}/latest/USD`);
-        const data = await res.json();
-        if(data.result === "success") {
-            ratesData = data.conversion_rates;
-            populateSelects(); // تعبئة قوائم المحول
-            displayRates(); // عرض بطاقات الأسعار
-        }
-    } catch (e) { console.log("Error fetching rates"); }
-}
-
-function populateSelects() {
-    const from = document.getElementById('from-currency');
-    const to = document.getElementById('to-currency');
-    const options = ["DZD", "EUR", "USD", "SAR", "GBP", "CAD", "SEK"];
-    
-    from.innerHTML = ""; to.innerHTML = "";
-    options.forEach(code => {
-        from.innerHTML += `<option value="${code}">${code}</option>`;
-        to.innerHTML += `<option value="${code}">${code}</option>`;
+function updateClock() {
+    const now = new Date();
+    document.getElementById('clock').textContent = now.toLocaleTimeString();
+    document.getElementById('date').textContent = now.toLocaleDateString('ar-DZ', {
+        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
     });
-    from.value = "EUR"; to.value = "DZD";
 }
+setInterval(updateClock, 1000);
+updateClock();
 
 function displayRates() {
-    const t = translations[currentLang];
     const container = document.getElementById('rates-container');
-    container.innerHTML = "";
-    
-    activeCurrencies.forEach(c => {
-        const priceBank = ratesData.DZD / ratesData[c.code];
-        const priceSquare = priceBank * squareFactor;
-
-        container.innerHTML += `
+    let html = '';
+    currencies.forEach(curr => {
+        html += `
             <div class="rate-card">
-                <div class="card-header">
-                    <div class="currency-info">
-                        <img src="https://flagcdn.com/w40/${c.flag}.png" width="30">
-                        <span class="currency-name">${c.name[currentLang]} (${c.code})</span>
-                    </div>
+                <div style="display:flex; justify-content:space-between;">
+                    <span>${curr.flag} ${curr.name}</span>
+                    <span style="color:#4caf50;">▲ مباشر</span>
                 </div>
-                <div class="price-main">
-                    <div class="square-box">
-                        <span class="square-value">${priceSquare.toFixed(2)} ${t.unit}</span>
-                        <span class="square-label">${t.square}</span>
-                    </div>
-                    <div class="bank-info">
-                        <small>${t.bank}</small><br>
-                        <span class="bank-value">${priceBank.toFixed(2)} ${t.unit}</span>
-                    </div>
+                <div style="display:flex; justify-content:space-around; margin-top:10px;">
+                    <div><small>البنك</small><br>${curr.bank}</div>
+                    <div style="color:#4caf50; font-weight:bold;"><small>السكوار</small><br>${curr.square}</div>
                 </div>
             </div>`;
     });
+    container.innerHTML = html;
 }
 
-function calculate() {
-    const amount = document.getElementById('calc-input').value;
-    const from = document.getElementById('from-currency').value;
-    const to = document.getElementById('to-currency').value;
-    if(amount && ratesData[from]) {
-        const res = (amount / ratesData[from]) * ratesData[to];
-        document.getElementById('calc-result').innerText = res.toLocaleString(undefined, {minimumFractionDigits: 2});
-    }
+function initCalc() {
+    const from = document.getElementById('from-currency');
+    const to = document.getElementById('to-currency');
+    const input = document.getElementById('calc-input');
+    const res = document.getElementById('calc-result');
+
+    const options = `<option value="DZD">DZD - دينار</option><option value="EUR">EUR - يورو</option><option value="USD">USD - دولار</option>`;
+    from.innerHTML = options; to.innerHTML = options;
+    to.value = "DZD";
+
+    input.oninput = () => {
+        let val = input.value;
+        if(from.value === "EUR" && to.value === "DZD") res.innerText = (val * 242).toLocaleString();
+        else if(from.value === "USD" && to.value === "DZD") res.innerText = (val * 224).toLocaleString();
+        else res.innerText = val;
+    };
 }
 
-function setLanguage(lang) {
-    currentLang = lang;
-    displayRates();
-    // تحديث نصوص الواجهة الأخرى هنا
-}
-
-document.getElementById('calc-input').addEventListener('input', calculate);
-document.getElementById('from-currency').addEventListener('change', calculate);
-document.getElementById('to-currency').addEventListener('change', calculate);
-
-getRates();
+displayRates();
+initCalc();
