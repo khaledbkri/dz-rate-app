@@ -11,8 +11,8 @@ const translations = {
         dir: "ltr",
         currencies: { 
             EUR: "Euro", USD: "US Dollar", GBP: "Pound Sterling", 
-            SAR: "Saudi Riyal", AED: "UAE Dirham", SEK: "Swedish Krona", 
-            CAD: "Canadian Dollar", TRY: "Turkish Lira" 
+            CAD: "Canadian Dollar", SEK: "Swedish Krona", TRY: "Turkish Lira", 
+            SAR: "Saudi Riyal", AED: "UAE Dirham", DZD: "Algerian Dinar" 
         },
         unit: "DA"
     },
@@ -24,8 +24,8 @@ const translations = {
         dir: "rtl",
         currencies: { 
             EUR: "الأورو", USD: "الدولار الأمريكي", GBP: "الجنيه الإسترليني", 
-            SAR: "الريال السعودي", AED: "الدرهم الإماراتي", SEK: "الكرونة السويدية", 
-            CAD: "الدولار الكندي", TRY: "الليرة التركية" 
+            CAD: "الدولار الكندي", SEK: "الكرونة السويدية", TRY: "الليرة التركية", 
+            SAR: "الريال السعودي", AED: "الدرهم الإماراتي", DZD: "الدينار الجزائري" 
         },
         unit: "دج"
     },
@@ -37,12 +37,20 @@ const translations = {
         dir: "ltr",
         currencies: { 
             EUR: "Euro", USD: "Dollar US", GBP: "Livre Sterling", 
-            SAR: "Riyal Saoudien", AED: "Dirham EAU", SEK: "Couronne Suédoise", 
-            CAD: "Dollar Canadien", TRY: "Lire Turque" 
+            CAD: "Dollar Canadien", SEK: "Couronne Suédoise", TRY: "Lire Turque", 
+            SAR: "Riyal Saoudien", AED: "Dirham EAU", DZD: "Dinar Algérien" 
         },
         unit: "DA"
     }
 };
+
+// قائمة العملات الثمانية المحددة في الصورة
+const activeCurrencies = [
+    {code:"EUR", flag:"eu"}, {code:"USD", flag:"us"},
+    {code:"GBP", flag:"gb"}, {code:"CAD", flag:"ca"},
+    {code:"SEK", flag:"se"}, {code:"TRY", flag:"tr"},
+    {code:"SAR", flag:"sa"}, {code:"AED", flag:"ae"}
+];
 
 function setLanguage(lang) {
     currentLang = lang;
@@ -53,8 +61,33 @@ function setLanguage(lang) {
     document.getElementById('calc-title').innerText = t.calcTitle;
     document.getElementById('calc-input').placeholder = t.placeholder;
     document.getElementById('res-text').innerText = t.result;
+    
+    updateSelectOptions(); // تحديث القوائم المنسدلة باللغة الجديدة
     displayRates();
     performConversion();
+}
+
+// تحديث خيارات المحول لتشمل العملات الثمانية + الدينار
+function updateSelectOptions() {
+    const fromSelect = document.getElementById('from-currency');
+    const toSelect = document.getElementById('to-currency');
+    const t = translations[currentLang];
+    
+    const options = [...activeCurrencies, {code: "DZD", flag: "dz"}];
+    
+    let html = "";
+    options.forEach(c => {
+        html += `<option value="${c.code}">${t.currencies[c.code]} (${c.code})</option>`;
+    });
+    
+    const currentFrom = fromSelect.value || "EUR";
+    const currentTo = toSelect.value || "DZD";
+    
+    fromSelect.innerHTML = html;
+    toSelect.innerHTML = html;
+    
+    fromSelect.value = currentFrom;
+    toSelect.value = currentTo;
 }
 
 async function getRates() {
@@ -72,19 +105,10 @@ function displayRates() {
     if (!ratesData.DZD) return;
     const t = translations[currentLang];
     const usdToDzd = ratesData.DZD;
-    
-    // قائمة العملات الموسعة لتظهر جميعها في الواجهة
-    const currencies = [
-        {code:"EUR", flag:"eu"}, {code:"USD", flag:"us"},
-        {code:"GBP", flag:"gb"}, {code:"CAD", flag:"ca"},
-        {code:"SEK", flag:"se"}, {code:"TRY", flag:"tr"},
-        {code:"SAR", flag:"sa"}, {code:"AED", flag:"ae"}
-    ];
-
     const container = document.getElementById('rates-container');
     container.innerHTML = "";
     
-    currencies.forEach(c => {
+    activeCurrencies.forEach(c => {
         const priceInDzd = usdToDzd / ratesData[c.code];
         container.innerHTML += `
             <div class="rate-card">
@@ -105,7 +129,6 @@ function performConversion() {
 
     if (amount && ratesData[from] && ratesData[to]) {
         const result = (amount / ratesData[from]) * ratesData[to];
-        // النتيجة تظهر الآن مع رمز العملة المختار بشكل احترافي
         document.getElementById('calc-result').innerText = result.toLocaleString(undefined, {maximumFractionDigits: 2}) + " " + to;
     } else {
         document.getElementById('calc-result').innerText = "0";
