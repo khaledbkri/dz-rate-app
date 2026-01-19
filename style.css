@@ -1,9 +1,96 @@
-body { font-family: sans-serif; background-color: #0f172a; color: white; text-align: center; direction: rtl; }
-.app-container { padding: 20px; max-width: 400px; margin: auto; }
-h1 span { color: #38bdf8; }
-.clock-box { background: #1e293b; padding: 15px; border-radius: 15px; margin-bottom: 20px; }
-#clock { font-size: 2rem; font-weight: bold; margin: 0; color: #38bdf8; }
-.rate-card { background: #1e293b; display: flex; justify-content: space-between; align-items: center; padding: 15px; margin-bottom: 10px; border-radius: 12px; border: 1px solid #334155; }
-.rate-card img { width: 30px; border-radius: 4px; }
-.calculator { margin-top: 30px; background: #38bdf8; color: #0f172a; padding: 20px; border-radius: 20px; }
-input, select { width: 80%; padding: 10px; margin: 10px 0; border-radius: 8px; border: none; font-size: 1rem; }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0d1117; /* لون خلفية داكن وأنيق */
+    color: white;
+    margin: 0;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.rate-card {
+    background: #1c2128;
+    border-radius: 15px;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-left: 5px solid #4caf50; /* الخط الأخضر الجانبي */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.currency-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.price-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.square-box {
+    text-align: center;
+}
+
+.square-value {
+    color: #4caf50; /* اللون الأخضر الذي أعجبك */
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: block;
+}
+
+.square-label {
+    color: #4caf50;
+    font-size: 0.8rem;
+}
+
+.bank-info {
+    text-align: right;
+    color: #8b949e;
+}
+
+.bank-value {
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.calculator {
+    background: #1c2128;
+    padding: 20px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+input, select {
+    width: 100%;
+    padding: 12px;
+    background: #0d1117;
+    border: 1px solid #30363d;
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+button {
+    background: #30363d;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+}
