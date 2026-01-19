@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديزاد ريت لايف</title>
+    <title>ديزاد ريت برو - أسعار الصرف</title>
     <link rel="stylesheet" href="style.css">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-3932693048334628" crossorigin="anonymous"></script>
@@ -18,22 +18,32 @@
             </div>
         </header>
 
-        <div id="rates-container"></div>
-
-        <div class="calculator">
-            <h3>حاسبة سريعة</h3>
-            <input type="number" id="calc-input" placeholder="أدخل المبلغ...">
-            <select id="calc-select">
-                <option value="EUR">أورو (€)</option>
-                <option value="USD">دولار ($)</option>
-                <option value="GBP">جنيه (£)</option>
-                <option value="SAR">ريال سعودي</option>
-                <option value="AED">درهم إماراتي</option>
-            </select>
-            <p>النتيجة: <span id="calc-result">0</span> دج</p>
+        <div id="rates-container">
+            <p>جاري تحديث الأسعار...</p>
         </div>
 
-        <div style="margin-top: 20px; min-height: 100px;">
+        <div class="calculator">
+            <h3>محول العملات الذكي</h3>
+            <input type="number" id="calc-input" placeholder="أدخل المبلغ...">
+            <div style="display: flex; gap: 10px; margin: 10px 0;">
+                <select id="from-currency" style="width: 50%;">
+                    <option value="EUR">من أورو (€)</option>
+                    <option value="USD">من دولار ($)</option>
+                    <option value="GBP">من جنيه (£)</option>
+                    <option value="DZD">من دينار (دج)</option>
+                </select>
+                <select id="to-currency" style="width: 50%;">
+                    <option value="DZD" selected>إلى دينار (دج)</option>
+                    <option value="EUR">إلى أورو (€)</option>
+                    <option value="USD">إلى دولار ($)</option>
+                    <option value="SAR">إلى ريال سعودي</option>
+                    <option value="AED">إلى درهم إماراتي</option>
+                </select>
+            </div>
+            <p style="font-size: 1.3rem; font-weight: bold;">النتيجة: <span id="calc-result">0</span></p>
+        </div>
+
+        <div style="margin-top: 25px; min-height: 100px; background: rgba(255,255,255,0.05); border-radius: 10px;">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-app-pub-3932693048334628"
