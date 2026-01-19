@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="8KajK_S9zE7whxLrpmLenup78-PVIIEqNjq9hmly-aM" />
-    <title>DzRate Pro | أسعار السكوار والبنك</title>
+    <title>DzRate Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="app-container">
+        <div class="language-switcher">
+            <button onclick="setLanguage('ar')">العربية</button>
+            <button onclick="setLanguage('en')">English</button>
+            <button onclick="setLanguage('fr')">Français</button>
+        </div>
+
         <header>
             <h1 style="text-align:center;">DzRate <span style="color:#4caf50;">Pro</span></h1>
             <div class="clock-box">
@@ -20,11 +26,11 @@
         <div id="rates-container"></div>
 
         <div class="calculator">
-            <h3 style="text-align:center; color:#4caf50;">محول العملات الذكي</h3>
-            <input type="number" id="calc-input" placeholder="أدخل المبلغ هنا...">
+            <h3 id="calc-title" style="text-align:center; color:#4caf50;">محول العملات الذكي</h3>
+            <input type="number" id="calc-input" placeholder="أدخل المبلغ...">
             <select id="from-currency"></select>
             <select id="to-currency"></select>
-            <p class="calc-res">النتيجة: <span id="calc-result">0</span></p>
+            <p class="calc-res"><span id="res-text">النتيجة</span>: <span id="calc-result">0</span></p>
         </div>
     </div>
     <script src="script.js"></script>
