@@ -6,45 +6,23 @@
     
     <meta name="google-site-verification" content="8KajK_S9zE7whxLrpmLenup78-PVIIEqNjq9hmly-aM" />
 
-    <title>DzRate Pro | Algeria Live Exchange Rates - Bank & Parallel Market (Square)</title>
-    <meta name="description" content="Check live Euro and USD to DZD exchange rates. Get real-time updates for Official Bank rates and Parallel Market (Square Port Said) in Algeria. Best for tourists and expats.">
-    <meta name="keywords" content="Algeria exchange rate, Euro to DZD, Square Port Said rate, Parallel Market Algeria, USD DZD black market, سعر الأورو في السكوار, صرف العملات في الجزائر">
+    <title>DzRate Pro | Bank & Parallel Market (Square)</title>
+    <meta name="description" content="Check live exchange rates for DZD. Official Bank & Parallel Market (Square Port Said) updates.">
     
-    <link rel="alternate" hreflang="ar" href="https://classy-truffle-61b9ba.netlify.app/" />
-    <link rel="alternate" hreflang="en" href="https://classy-truffle-61b9ba.netlify.app/" />
-    <link rel="alternate" hreflang="fr" href="https://classy-truffle-61b9ba.netlify.app/" />
-
     <link rel="stylesheet" href="style.css">
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-3932693048334628" crossorigin="anonymous"></script>
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "DzRate Pro",
-      "operatingSystem": "Android, iOS, Windows",
-      "applicationCategory": "FinanceApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      }
-    }
-    </script>
 </head>
 <body>
     <div class="app-container">
-        <div class="language-switcher" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 15px;">
+        <div class="language-switcher" style="display: flex; justify-content: center; gap: 10px; margin-bottom: 20px;">
             <button onclick="setLanguage('en')">English</button>
             <button onclick="setLanguage('ar')">العربية</button>
             <button onclick="setLanguage('fr')">Français</button>
         </div>
 
         <header>
-            <h1 id="app-title">DzRate <span>Live</span></h1>
+            <h1 id="app-title">DzRate <span style="color: #4caf50;">Pro</span></h1>
             <div class="clock-box">
-                <p id="clock">00:00:00</p>
+                <p id="clock" style="color: #4caf50; font-weight: bold;">00:00:00</p>
                 <p id="date">Loading...</p>
             </div>
         </header>
@@ -52,31 +30,17 @@
         <div id="rates-container"></div>
 
         <div class="calculator">
-            <h3 id="calc-title">Currency Converter</h3>
+            <h3 id="calc-title" style="color: #4caf50; text-align: center;">Currency Converter</h3>
             <input type="number" id="calc-input" placeholder="Enter amount...">
             <div style="display: flex; gap: 10px; margin: 10px 0;">
-                <select id="from-currency" style="width: 50%;"></select>
-                <select id="to-currency" style="width: 50%;"></select>
+                <select id="from-currency"></select>
+                <select id="to-currency"></select>
             </div>
-            <p style="font-size: 1.3rem; font-weight: bold; color: #4caf50;"><span id="res-text">Result</span>: <span id="calc-result">0</span></p>
-        </div>
-
-        <div style="margin-top: 20px; min-height: 100px; text-align: center;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-app-pub-3932693048334628"
-                 data-ad-slot="8532932768"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-        </div>
-
-        <div class="seo-footer" style="margin-top: 30px; padding: 15px; font-size: 0.8rem; color: #bbb; border-top: 1px solid #444; text-align: center;">
-            <p>Track live <strong>Euro to DZD</strong> and <strong>USD to DZD</strong> exchange rates. We cover both <strong>Official Bank rates</strong> and the <strong>Parallel Market (Square Port Said)</strong> in Algeria.</p>
-            <p>نحن نوفر لكم أسعار الصرف الحية للأورو والدولار مقابل الدينار الجزائري (أسعار البنك والسكوار) وتوقعات السوق يومياً.</p>
+            <p style="text-align: center; font-size: 1.4rem; font-weight: bold; color: #4caf50;">
+                <span id="res-text">Result</span>: <span id="calc-result">0</span>
+            </p>
         </div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
