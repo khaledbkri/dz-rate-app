@@ -1,51 +1,33 @@
 body {
     background-color: #0d1117;
     color: #ffffff;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 10px;
-    display: flex;
-    justify-content: center;
+    font-family: sans-serif;
+    margin: 0; padding: 15px;
+    display: flex; justify-content: center;
 }
-
 .app-container {
-    max-width: 500px;
-    width: 100%;
-    background: #161b22;
-    padding: 20px;
-    border-radius: 15px;
-    border: 1px solid #30363d;
+    max-width: 500px; width: 100%;
+    background: #161b22; padding: 20px;
+    border-radius: 15px; border: 1px solid #30363d;
 }
-
-header h1 { text-align: center; margin: 0; }
-.clock-box { text-align: center; margin-bottom: 20px; color: #4caf50; }
-
 .rate-card {
-    background: #0d1117;
-    border: 1px solid #4caf50;
-    padding: 15px;
-    border-radius: 12px;
-    margin-bottom: 15px;
+    background: #1c2128;
+    border-left: 4px solid #4caf50;
+    padding: 15px; border-radius: 8px;
+    margin-bottom: 12px;
 }
-
 .calculator {
-    background: #0d1117;
-    padding: 15px;
-    border-radius: 12px;
-    border: 1px solid #30363d;
-    margin-top: 20px;
+    background: #0d1117; padding: 20px;
+    border-radius: 12px; border: 1px solid #30363d;
+    margin-top: 25px;
 }
-
 input, select {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    background: #161b22;
-    color: white;
-    border: 1px solid #30363d;
-    border-radius: 5px;
+    width: 100%; padding: 12px; margin: 8px 0;
+    background: #1c2128; color: white;
+    border: 1px solid #4caf50; border-radius: 8px;
 }
-
-.calc-res { font-size: 1.5rem; text-align: center; color: #4caf50; font-weight: bold; }
-.language-switcher { display: flex; justify-content: center; gap: 5px; margin-bottom: 15px; }
-.language-switcher button { background: none; border: 1px solid #4caf50; color: white; cursor: pointer; padding: 5px 10px; border-radius: 5px; }
+.calc-res {
+    font-size: 1.6rem; text-align: center;
+    color: #4caf50; font-weight: bold;
+}
+.clock-box { text-align: center; color: #4caf50; }
