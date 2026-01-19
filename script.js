@@ -14,7 +14,8 @@ const translations = {
             CAD: "Canadian Dollar", SEK: "Swedish Krona", TRY: "Turkish Lira", 
             SAR: "Saudi Riyal", AED: "UAE Dirham", DZD: "Algerian Dinar" 
         },
-        unit: "DA"
+        unit: "DA",
+        dateLocale: "en-GB"
     },
     ar: {
         title: "ديزاد ريت <span>مباشر</span>",
@@ -27,7 +28,8 @@ const translations = {
             CAD: "الدولار الكندي", SEK: "الكرونة السويدية", TRY: "الليرة التركية", 
             SAR: "الريال السعودي", AED: "الدرهم الإماراتي", DZD: "الدينار الجزائري" 
         },
-        unit: "دج"
+        unit: "دج",
+        dateLocale: "ar-DZ"
     },
     fr: {
         title: "DzRate <span>Direct</span>",
@@ -40,17 +42,30 @@ const translations = {
             CAD: "Dollar Canadien", SEK: "Couronne Suédoise", TRY: "Lire Turque", 
             SAR: "Riyal Saoudien", AED: "Dirham EAU", DZD: "Dinar Algérien" 
         },
-        unit: "DA"
+        unit: "DA",
+        dateLocale: "fr-FR"
     }
 };
 
-// قائمة العملات الثمانية المحددة في الصورة
 const activeCurrencies = [
     {code:"EUR", flag:"eu"}, {code:"USD", flag:"us"},
     {code:"GBP", flag:"gb"}, {code:"CAD", flag:"ca"},
     {code:"SEK", flag:"se"}, {code:"TRY", flag:"tr"},
     {code:"SAR", flag:"sa"}, {code:"AED", flag:"ae"}
 ];
+
+// دالة تحديث الوقت والتاريخ فوراً
+function updateDateTime() {
+    const now = new Date();
+    const t = translations[currentLang];
+    
+    // تحديث الساعة
+    document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
+    
+    // تحديث التاريخ (لحل مشكلة Loading)
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('date').innerText = now.toLocaleDateString(t.dateLocale, options);
+}
 
 function setLanguage(lang) {
     currentLang = lang;
@@ -62,17 +77,16 @@ function setLanguage(lang) {
     document.getElementById('calc-input').placeholder = t.placeholder;
     document.getElementById('res-text').innerText = t.result;
     
-    updateSelectOptions(); // تحديث القوائم المنسدلة باللغة الجديدة
+    updateDateTime(); // تحديث التاريخ فور تغيير اللغة
+    updateSelectOptions();
     displayRates();
     performConversion();
 }
 
-// تحديث خيارات المحول لتشمل العملات الثمانية + الدينار
 function updateSelectOptions() {
     const fromSelect = document.getElementById('from-currency');
     const toSelect = document.getElementById('to-currency');
     const t = translations[currentLang];
-    
     const options = [...activeCurrencies, {code: "DZD", flag: "dz"}];
     
     let html = "";
@@ -82,10 +96,8 @@ function updateSelectOptions() {
     
     const currentFrom = fromSelect.value || "EUR";
     const currentTo = toSelect.value || "DZD";
-    
     fromSelect.innerHTML = html;
     toSelect.innerHTML = html;
-    
     fromSelect.value = currentFrom;
     toSelect.value = currentTo;
 }
@@ -125,8 +137,6 @@ function performConversion() {
     const amount = document.getElementById('calc-input').value;
     const from = document.getElementById('from-currency').value;
     const to = document.getElementById('to-currency').value;
-    const t = translations[currentLang];
-
     if (amount && ratesData[from] && ratesData[to]) {
         const result = (amount / ratesData[from]) * ratesData[to];
         document.getElementById('calc-result').innerText = result.toLocaleString(undefined, {maximumFractionDigits: 2}) + " " + to;
@@ -139,10 +149,8 @@ document.getElementById('calc-input').addEventListener('input', performConversio
 document.getElementById('from-currency').addEventListener('change', performConversion);
 document.getElementById('to-currency').addEventListener('change', performConversion);
 
+// التشغيل
 getRates();
 setLanguage('en'); 
-setInterval(() => {
-    const now = new Date();
-    document.getElementById('clock').innerText = now.toLocaleTimeString('en-GB');
-}, 1000);
+setInterval(updateDateTime, 1000); // تحديث الساعة والتاريخ كل ثانية
 setInterval(getRates, 300000);
