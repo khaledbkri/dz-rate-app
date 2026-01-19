@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ديزاد ريت برو - أسعار الصرف</title>
+    
+    <title>ديزاد ريت برو | Live Currency Rates Algeria - Euro & USD to DZD</title>
+    <meta name="description" content="أسعار الصرف في الجزائر: أورو، دولار، دينار. Exchange rates in Algeria: Euro, USD, DZD. Taux de change en Algérie.">
+    
+    <link rel="alternate" hreflang="ar" href="https://classy-truffle-61b9ba.netlify.app/" />
+    <link rel="alternate" hreflang="en" href="https://classy-truffle-61b9ba.netlify.app/" />
+    <link rel="alternate" hreflang="fr" href="https://classy-truffle-61b9ba.netlify.app/" />
+
     <link rel="stylesheet" href="style.css">
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-app-pub-3932693048334628" crossorigin="anonymous"></script>
@@ -18,32 +25,27 @@
             </div>
         </header>
 
-        <div id="rates-container">
-            <p>جاري تحديث الأسعار...</p>
-        </div>
+        <div id="rates-container"></div>
 
         <div class="calculator">
-            <h3>محول العملات الذكي</h3>
-            <input type="number" id="calc-input" placeholder="أدخل المبلغ...">
+            <h3 id="calc-title">محول العملات | Converter | Convertisseur</h3>
+            <input type="number" id="calc-input" placeholder="المبلغ / Amount / Montant">
             <div style="display: flex; gap: 10px; margin: 10px 0;">
                 <select id="from-currency" style="width: 50%;">
-                    <option value="EUR">من أورو (€)</option>
-                    <option value="USD">من دولار ($)</option>
-                    <option value="GBP">من جنيه (£)</option>
-                    <option value="DZD">من دينار (دج)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="DZD">DZD (دج)</option>
                 </select>
                 <select id="to-currency" style="width: 50%;">
-                    <option value="DZD" selected>إلى دينار (دج)</option>
-                    <option value="EUR">إلى أورو (€)</option>
-                    <option value="USD">إلى دولار ($)</option>
-                    <option value="SAR">إلى ريال سعودي</option>
-                    <option value="AED">إلى درهم إماراتي</option>
+                    <option value="DZD" selected>DZD (دج)</option>
+                    <option value="EUR">EUR (€)</option>
+                    <option value="USD">USD ($)</option>
                 </select>
             </div>
-            <p style="font-size: 1.3rem; font-weight: bold;">النتيجة: <span id="calc-result">0</span></p>
+            <p style="font-size: 1.3rem; font-weight: bold; color: #4caf50;">Result: <span id="calc-result">0</span></p>
         </div>
 
-        <div style="margin-top: 25px; min-height: 100px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+        <div style="margin-top: 20px; min-height: 100px; text-align: center;">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-app-pub-3932693048334628"
@@ -53,6 +55,12 @@
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
+        </div>
+
+        <div class="seo-footer" style="margin-top: 30px; padding: 15px; font-size: 0.8rem; color: #bbb; border-top: 1px solid #444;">
+            <p><strong>AR:</strong> تابع أسعار الصرف الحية للأورو والدولار مقابل الدينار الجزائري في السكوار والبنك.</p>
+            <p><strong>EN:</strong> Track live Euro and USD to Algerian Dinar (DZD) exchange rates in the black market and banks.</p>
+            <p><strong>FR:</strong> Suivez les taux de change en direct de l'Euro et du Dollar face au Dinar Algérien (Square et Banque).</p>
         </div>
     </div>
     <script src="script.js"></script>
