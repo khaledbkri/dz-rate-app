@@ -1,7 +1,7 @@
 const apiKey = "fb87de9454864be34e7cbc88";
 let ratesData = {};
 let currentLang = 'en';
-const squareFactor = 1.35; 
+const squareFactor = 1.35; // نسبة الزيادة في سعر السكوار
 
 const translations = {
     en: { bank: "Bank Rate", square: "Parallel Market", unit: "DA", calc: "Converter", res: "Result" },
@@ -21,10 +21,10 @@ async function getRates() {
         const data = await res.json();
         if(data.result === "success") {
             ratesData = data.conversion_rates;
-            populateSelects();
-            displayRates();
+            populateSelects(); // تعبئة قوائم المحول
+            displayRates(); // عرض بطاقات الأسعار
         }
-    } catch (e) { console.log("Error"); }
+    } catch (e) { console.log("Error fetching rates"); }
 }
 
 function populateSelects() {
@@ -77,9 +77,18 @@ function calculate() {
     const to = document.getElementById('to-currency').value;
     if(amount && ratesData[from]) {
         const res = (amount / ratesData[from]) * ratesData[to];
-        document.getElementById('calc-result').innerText = res.toFixed(2);
+        document.getElementById('calc-result').innerText = res.toLocaleString(undefined, {minimumFractionDigits: 2});
     }
 }
 
+function setLanguage(lang) {
+    currentLang = lang;
+    displayRates();
+    // تحديث نصوص الواجهة الأخرى هنا
+}
+
 document.getElementById('calc-input').addEventListener('input', calculate);
+document.getElementById('from-currency').addEventListener('change', calculate);
+document.getElementById('to-currency').addEventListener('change', calculate);
+
 getRates();
